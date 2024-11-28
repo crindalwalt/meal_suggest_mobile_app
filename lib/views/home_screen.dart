@@ -3,15 +3,25 @@ import 'package:meal_suggest/views/add_meal_screen.dart';
 import 'package:meal_suggest/views/meal_detail_screen.dart';
 import 'package:meal_suggest/views/search_meal_screen.dart';
 import 'package:meal_suggest/views/utils/bottom_navbar.dart';
+import 'package:meal_suggest/views/utils/side_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+            onPressed: () {
+              _scaffoldKey.currentState?.openDrawer();
+            },
+            icon: Icon(Icons.menu)),
         title: Row(
           children: [
             Image.network(
@@ -33,6 +43,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+      drawer: SideDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
